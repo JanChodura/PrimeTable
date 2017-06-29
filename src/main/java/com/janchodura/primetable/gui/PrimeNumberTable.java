@@ -18,7 +18,7 @@ import com.janchodura.primetable.prime.NumberPrime.Builder;
 import com.janchodura.primetable.prime.PrimeChecker;
 
 /**
- * Table of integers with styles for prime numbers.
+ * Table of integers with styles for prime numbers in Swing.
  * 
  * @author jach
  *
@@ -34,7 +34,11 @@ public class PrimeNumberTable {
    private PrimeNumberTable() {
 
    }
-
+   
+   /**
+    * Create empty JTable with all cells.
+    * @return
+    */
    public static PrimeNumberTable inflate() {
 
       PrimeNumberTable inflater = new PrimeNumberTable();
@@ -44,7 +48,10 @@ public class PrimeNumberTable {
       
       return inflater;
    }
-
+   
+   /**
+    * Building of table model on intialization of JTable.
+    */
    private void buildTableModel() {
 
       Vector<String> columnNames = new Vector<String>();
@@ -75,8 +82,12 @@ public class PrimeNumberTable {
       };
 
    }
-
-   public void fillNumbers(int start) {
+   
+   /**
+    * Fills by formatted values.
+    * @param start
+    */
+   public void fill(int start) {
 
       addCellRenderer();
 
@@ -92,11 +103,15 @@ public class PrimeNumberTable {
       }
 
    }
-
+   
+   /**
+    * Renders cell due to its value.
+    */
    private void addCellRenderer() {
 
       TableCellRenderer renderer = new TableCellRenderer();
-
+      renderer.setHorizontalAlignment(JLabel.RIGHT);
+      
       for (int column = 0; column < TABLE_DIMESION; column++) {
 
          TableColumn tm = table.getColumnModel().getColumn(column);
@@ -109,12 +124,21 @@ public class PrimeNumberTable {
       return table;
    }
 
-   
+   /**
+    * 
+    * @return List of numbers with prime flag in JTable 
+    */
    public List<NumberPrime> getNumberPrimes() {
    
       return numberPrimes;
    }
-
+   
+   /**
+    * Renders cell by value with isPrime flag.
+    * 
+    * @author jach
+    *
+    */
    private class TableCellRenderer extends DefaultTableCellRenderer {
 
       public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {

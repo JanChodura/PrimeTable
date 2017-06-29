@@ -1,10 +1,11 @@
 package com.janchodura.primetable.prime;
 
 /**
- * Number with prime attribute.
+ * Number with isPrime flag.
  * 
  * @author jach
- *
+ * 
+ *@see PrimeChecker
  */
 public class NumberPrime {
 

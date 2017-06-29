@@ -27,14 +27,15 @@ import net.miginfocom.swing.MigLayout;
 public class PrimeNumberFrame {
 
    private static final String PRIME_TABLE_NAME = "PrimeTable";
-   private static final String LABEL_EXPORT = "Export";
+   private static final String LABEL_EXPORT = "Vygenerovat excel";
    private static final String LABEL_START = "Čísla od:";
    private static final String BUTTON_EXIT_NAME = "Konec";
 
+   private static int MIN_VALUE = 10000;
    private static int MAX_VALUE = 10000;
 
    private JPanel panel;
-   private PrimeNumberTable tableInflater;
+   private PrimeNumberTable primeNumberTable;
 
    public void init() {
 
@@ -55,11 +56,11 @@ public class PrimeNumberFrame {
 
    private void addElements() {
 
+      addTable();
       addLabelForTextField();
       addTextField();
       addExcelButton();
       addExitButton();
-      addTable();
    }
 
    private void addLabelForTextField() {
@@ -67,7 +68,11 @@ public class PrimeNumberFrame {
       JLabel label = new JLabel(LABEL_START);
       panel.add(label);
    }
-
+   
+   /**
+    * Creates text field for inputting starting value and adds listener for "enter".
+    * @return
+    */
    private JTextField addTextField() {
 
       int width = 5;
@@ -76,14 +81,23 @@ public class PrimeNumberFrame {
 
          public void actionPerformed(ActionEvent e) {
 
+            defaultValue(startNumberElement);
+            
             int start = Integer.valueOf(startNumberElement.getText());
-            if (Integer.valueOf(start) > MAX_VALUE) {
+            if (start<MIN_VALUE && start > MAX_VALUE) {
 
                startNumberElement.setForeground(Color.RED);
             } else {
 
                startNumberElement.setForeground(Color.BLACK);
-               tableInflater.fillNumbers(start);
+               primeNumberTable.fill(start);
+            }
+         }
+
+         private void defaultValue(JTextField startNumberElement) {
+
+            if(startNumberElement.getText().isEmpty()){
+               startNumberElement.setText("1");
             }
          }
 
@@ -93,7 +107,11 @@ public class PrimeNumberFrame {
 
       return startNumberElement;
    }
-
+   
+   /**
+    * Creates button for exporting to xls with listener.
+    * @return
+    */
    private void addExcelButton() {
 
       JButton excelButton = new JButton(LABEL_EXPORT);
@@ -111,7 +129,7 @@ public class PrimeNumberFrame {
 
             try {
 
-               Export export = new ExportXls(tableInflater.getNumberPrimes(), path);
+               Export export = new ExportXls(primeNumberTable.getNumberPrimes(), path);
                export.write();
 
             } catch (FileNotFoundException e) {
@@ -135,12 +153,12 @@ public class PrimeNumberFrame {
       quitButton.addActionListener((ActionEvent event) -> {
          System.exit(0);
       });
-      panel.add(quitButton, "wrap");
+      panel.add(quitButton);
    }
 
    private void addTable() {
 
-      tableInflater = PrimeNumberTable.inflate();
-      panel.add(new JScrollPane(tableInflater.getTable()), "span, grow");
+      primeNumberTable = PrimeNumberTable.inflate();
+      panel.add(new JScrollPane(primeNumberTable.getTable()), "span, wrap");
    }
 }
