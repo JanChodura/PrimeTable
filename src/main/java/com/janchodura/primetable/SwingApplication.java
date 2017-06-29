@@ -1,21 +1,15 @@
 package com.janchodura.primetable;
 
-import java.awt.event.ActionEvent;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import com.janchodura.primetable.gui.PrimeNumberFrame;
-import com.janchodura.primetable.gui.PrimeNumberTable;
 
-import net.miginfocom.swing.MigLayout;
-
+/**
+ * Main app class. 
+ * @author jach
+ *
+ */
 public class SwingApplication {
    
    public SwingApplication(){
@@ -55,7 +49,10 @@ public class SwingApplication {
          // handle exception
       }
    }
-
+   
+   /**
+    * Creates frame with elements and behaviour.
+    */
    private void initUI() {
 
       PrimeNumberFrame frame = new PrimeNumberFrame();

@@ -1,5 +1,11 @@
 package com.janchodura.primetable.prime;
 
+/**
+ * Number with prime attribute.
+ * 
+ * @author jach
+ *
+ */
 public class NumberPrime {
 
    private int value;
@@ -8,7 +14,7 @@ public class NumberPrime {
    public static class Builder {
 
       private int value;
-      private boolean isPrime;
+      private boolean isPrime = false;
 
       public Builder value(int value) {
 

@@ -2,6 +2,12 @@ package com.janchodura.primetable.prime;
 
 public class PrimeChecker {
 
+   /**
+    * Checks if number is prime or not.
+    * 
+    * @param n
+    * @return
+    */
    public static boolean isPrime(int n) {
 
       if (n < 2) {

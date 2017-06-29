@@ -23,6 +23,10 @@ public class PrimeCheckerTest {
       this.expectedResult = expectedResult;
    }
    
+   /**
+    * Tested values are in parameters. Better for testing more values.
+    * @return
+    */
    @Parameterized.Parameters
    public static Collection<Object[]> primeNumbers() {
       return Arrays.asList(new Object[][] {
